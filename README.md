@@ -1,38 +1,90 @@
 ---
-page_type: sample
-languages:
-- javascript
-products:
-- azure
-description: "Azure Cosmos DB is a globally distributed multi-model database."
-urlFragment: azure-cosmos-db-sql-api-nodejs-getting-started
+
+# Node GraphQL Server for Azure Cosmos DB
+
+This Node.js server utilizes Apollo Server to handle GraphQL requests and interacts with Azure Cosmos DB to manage user data. The server is designed to provide a robust API for user operations including fetching and creating user records.
+
+## Prerequisites
+
+- Node.js installed (v12.x or higher recommended)
+- Access to an Azure Cosmos DB account
+- An environment where Node.js can run (local machine, server, or a cloud environment)
+
+## Configuration
+
+1. **Environment Variables**: Before running the server, you must configure the necessary environment variables. Create a `.env` file in the root directory and add the following keys:
+
+   ```plaintext
+   COSMOS_ENDPOINT=your_cosmos_db_endpoint
+   COSMOS_KEY=your_cosmos_db_key
+   DATABASE_ID=your_database_id
+   CONTAINER_ID=your_container_id
+   ```
+
+   Replace `your_cosmos_db_endpoint`, `your_cosmos_db_key`, `your_database_id`, and `your_container_id` with your actual Azure Cosmos DB settings.
+
+2. **Dependencies**: Install the required packages defined in `package.json`.
+
+   ```bash
+   npm install
+   ```
+
+## Running the Server
+
+To start the server, run the following command in the terminal:
+
+```bash
+npm start
+```
+
+This will initiate the server on the default port (4000) and make the GraphQL API available for interaction.
+
+## GraphQL Schema
+
+The GraphQL schema defines the following main types and operations:
+
+- **User Type**: Represents a user with fields such as `id`, `name`, and `email`.
+- **Queries**:
+  - `getUserById`: Retrieves a user by their unique ID.
+- **Mutations**:
+  - `createUser`: Creates a new user with provided details.
+
+## Using the API
+
+You can interact with the GraphQL API using any standard GraphQL client or tools like Apollo Studio, Postman, or simple CURL commands. Here’s an example query to fetch a user by ID:
+
+```graphql
+query {
+  getUserById(id: "user_id_here") {
+    id
+    name
+    email
+  }
+}
+```
+
+And a mutation to create a user:
+
+```graphql
+mutation {
+  createUser(input: { name: "John Doe", email: "john.doe@example.com" }) {
+    id
+    name
+    email
+  }
+}
+```
+
+## Development
+
+- **Local Development**: For local development, ensure that you have configured the `.env` file as mentioned above.
+- **Deployment**: For deployment instructions, refer to your specific hosting or cloud provider's documentation.
+
+## Support
+
+For any issues or support requests, please submit an issue on the GitHub repository page or contact the development team.
+
 ---
-
-# Developing a Node.js app using the Azure Cosmos DB SQL API
-Azure Cosmos DB is a globally distributed multi-model database. One of the supported APIs is the SQL API, which provides a JSON document model with SQL querying and JavaScript procedural logic. This sample shows you how to use Azure Cosmos DB with the SQL API to store and access data from a Node.js application.
-
-## Running this sample
-* Before you can run this sample, you must have the following perquisites:
-	* An active Azure Cosmos DB account - If you don't have an account, refer to the [Create an Azure Cosmos DB account](https://docs.microsoft.com/en-us/azure/cosmos-db/create-sql-api-nodejs#create-a-database-account) article.
-	* [Node.js](https://nodejs.org/en/) version v0.10.29 or higher.
-	* [Git](http://git-scm.com/).
-
-
-1. We created a sample Node.js app connected to your "Items" collection. Download and extract the app.
- from the Azure Cosmos DB portal.
-
-2. Change directories to the repo using `cd sql-nodejs` or open with your favorite IDE (Visual Studio/Visual Studio Code).  
-
-3. There is no need to change the credentials from the extracted app.  We have entered the Azure Cosmos DB endpoint URL and the key into your `app.js` file.
-
-4. Run `npm install` in a terminal to install required npm modules
- 
-5. Run `node app.js` in a terminal to start your start your node application.
-
-## About the code
-The code included in this sample is intended to get you quickly started with a Node.js console application that connects to Azure Cosmos DB with the SQL API.
-
-## More information
 
 - [Azure Cosmos DB](https://docs.microsoft.com/azure/cosmos-db/introduction)
 - [Azure Cosmos DB: SQL API](https://docs.microsoft.com/en-us/azure/cosmos-db/sql-api-introduction)
